@@ -5,7 +5,7 @@
   vars:
     ssh_use_pam: true # to allow access with our key on ec2
     jenkins_hostname: localhost
-
+    ansible_remote_tmp: /tmp/ansible
   roles:
     - role: geerlingguy.jenkins
     - role: geerlingguy.ansible-role-packer
