@@ -29,7 +29,7 @@
     {
     "type": "ansible",
     "playbook_file": "jenkins.yml",
-    "extra_arguments": ["--extra-vars", "ansible_python_interpreter=/usr/bin/python3"]
+    "extra_arguments": ["--extra-vars", "ansible_python_interpreter=/usr/bin/python3", "-vvvv"]
   }],
   "post-processors": [{
       "output": "manifest.json",
