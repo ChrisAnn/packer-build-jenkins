@@ -12,8 +12,7 @@ node {
          sh "packer build -var 'aws_region=eu-west-1' jenkins.json"
        }
    }
-   stage('Results') {
-      sh "cat manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2"
-      archive 'manifest.json'
+   stage('Store Artifacts') {
+      archiveArtifacts 'manifest.json'
    }
 }
