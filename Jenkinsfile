@@ -12,8 +12,8 @@ node {
          sh "packer build -var 'aws_region=eu-west-1' jenkins.json"
        }
    }
-   //stage('Results') {
-   //   junit '**/target/surefire-reports/TEST-*.xml'
-    //  archive 'target/*.jar'
-   //}
+   stage('Results') {
+      sh "cat manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2"
+      archive 'manifest.json'
+   }
 }

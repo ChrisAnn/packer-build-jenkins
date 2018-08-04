@@ -30,5 +30,10 @@
     "type": "ansible",
     "playbook_file": "jenkins.yml",
     "extra_arguments": ["--extra-vars", "ansible_python_interpreter=/usr/bin/python3"]
-  }]
+  }],
+  "post-processors": [{
+      "output": "manifest.json",
+      "strip_path": true,
+      "type": "manifest"
+    }]
 }
