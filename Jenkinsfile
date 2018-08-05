@@ -4,7 +4,11 @@ ansiColor('xterm') {
             // Get some code from a GitHub repository
             git 'https://github.com/ChrisAnn/packer-build-jenkins.git'
         }
-            stage('Setup') {
+        stage('Validate') {
+            sh "packer validate jenkins.json"
+            sh "ansible-playbook jenkins.yml --syntax-check"
+        }
+        stage('Setup') {
                 sh "ansible-galaxy install -r requirements.yml"
             }
         stage('Build') {
