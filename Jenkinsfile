@@ -1,34 +1,24 @@
-pipeline {
-    agent any
-
-    options {
-        ansiColor('xterm')
-    }
-
-    stages {
+ansiColor('xterm') {
+    node {
+        stage('Checkout') {
+            // Get some code from a GitHub repository
+            git 'https://github.com/ChrisAnn/packer-build-jenkins.git'
+        }
         stage('Setup') {
-            steps {
-                sh "ansible-galaxy install -r requirements.yml"
-            }
+            sh "ansible-galaxy install -r requirements.yml"
         }
         stage('Validate') {
-            steps {
-                sh "packer validate jenkins.json"
-                sh "ansible-playbook jenkins.yml --syntax-check"
-            }
+            sh "packer validate jenkins.json"
+            sh "ansible-playbook jenkins.yml --syntax-check"
         }
         stage('Build') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'aws_access_keys', usernameVariable: 'AWS_ACCESS_KEY', passwordVariable: 'AWS_SECRET_KEY')]) {
-                    // Run the packer build
-                    sh "packer build -var 'aws_region=eu-west-1' jenkins.json"
-                }
+            withCredentials([usernamePassword(credentialsId: 'aws_access_keys', usernameVariable: 'AWS_ACCESS_KEY', passwordVariable: 'AWS_SECRET_KEY')]) {
+            // Run the packer build
+                sh "packer build -var 'aws_region=eu-west-1' jenkins.json"
             }
         }
         stage('Store Artifacts') {
-            steps {
-                archiveArtifacts 'manifest.json'
-            }
+            archiveArtifacts 'manifest.json'
         }
     }
 }
