@@ -2,7 +2,7 @@ ansiColor('xterm') {
     node {
         stage('Checkout') {
             // Get some code from a GitHub repository
-            git 'https://github.com/ChrisAnn/packer-build-jenkins.git'
+            checkout scm
         }
         stage('Setup') {
             sh "ansible-galaxy install -r requirements.yml"
