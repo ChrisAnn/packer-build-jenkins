@@ -1,3 +1,4 @@
+- src: geerlingguy.java
 - src: geerlingguy.jenkins
-- src: geerlingguy.ansible-role-packer
+- src: geerlingguy.packer
 - src: geerlingguy.ansible

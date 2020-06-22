@@ -9,6 +9,7 @@
     jenkins_plugins: [ansicolor]
 
   roles:
+    - geerlingguy.java
     - geerlingguy.jenkins
-    - geerlingguy.ansible-role-packer
+    - geerlingguy.packer
     - geerlingguy.ansible
